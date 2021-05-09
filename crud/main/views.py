@@ -1,11 +1,11 @@
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.viewsets import ModelViewSet
+
+from .models import Task
+from .serializers import TaskSerializer
 
 
-class IndexView(APIView):
-    """Главная страница.
-    """
-    permission_classes = [IsAuthenticated]
-    def get(self, request):
-        return Response({'key': 'SUCCESS'})
+class TaskViewSet(ModelViewSet):
+    queryset = Task.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = TaskSerializer
