@@ -1,6 +1,5 @@
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
-
 from .models import Task
 from .serializers import TaskSerializer
 
