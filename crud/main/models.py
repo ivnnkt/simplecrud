@@ -8,14 +8,22 @@ from rest_framework.authtoken.models import Token
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
+    """При создании нового пользователя создает его токен аутентификации"""
     if created:
         Token.objects.create(user=instance)
 
 
 class Task(models.Model):
-    title = models.CharField(verbose_name="Название задачи", max_length=250)
-    content = models.TextField(verbose_name="Описание задачи", blank=True)
-    created = models.DateField(
+    """Модель Задача.
+
+    title -- название задачи, максимальная длинна 250 символов.
+    content -- описание задачи (чтосделать), поле может быть пустым.
+    created -- дата создания задачи, указывается в формате 'YYYY-MM-DD',
+    если не указано другое, автоматически указывается текущая дата.
+    """
+    title: str = models.CharField(verbose_name="Название задачи", max_length=250)
+    content: str = models.TextField(verbose_name="Описание задачи", blank=True)
+    created: str = models.DateField(
         verbose_name="Дата создания задачи",
         default=timezone.now().strftime("%Y-%m-%d")
     )

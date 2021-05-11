@@ -1,6 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import SimpleRouter
-from main.views import TaskViewSet
+from .views import TaskViewSet
+
 
 router = SimpleRouter()
 
